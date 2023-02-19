@@ -7,17 +7,9 @@ import com.amigoscode.cli_project.user.UserService;
 import com.amigoscode.cli_project.utils.MyUuid;
 
 public class Booking {
-    private static final UserService userService;
-    private static final BookingService bookingService;
-
     private UUID id;
     private UUID userId;
     private Car car;
-
-    static {
-        userService = new UserService();
-        bookingService = new BookingService();
-    }
 
     @Override
     public String toString() {
@@ -32,10 +24,6 @@ public class Booking {
         this.id = MyUuid.generate();
         this.userId = userId;
         this.car = car;
-        // Save booking in DB
-        bookingService.save(this);
-        // Send the bookingId to user for updating user
-        userService.addBooking(userId, this.id);
     }
 
     public UUID getId() {

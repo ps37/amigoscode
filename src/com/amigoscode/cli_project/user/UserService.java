@@ -3,7 +3,11 @@ package com.amigoscode.cli_project.user;
 import java.util.UUID;
 
 public class UserService {
-    private final UserDao dao = new UserFileDataAccessService();
+    private final UserDao dao;
+
+    public UserService(UserDao dao) {
+        this.dao = dao;
+    }
 
     public void addUser(String firstName, String lastName) {
         dao.saveUser(new User(firstName, lastName));
@@ -20,6 +24,5 @@ public class UserService {
     public void addBooking(UUID userId, UUID bookingId) {
         var user = this.getUser(userId);
         user.addBooking(bookingId);
-        dao.updateUser(user);
     }
 }

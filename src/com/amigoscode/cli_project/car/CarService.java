@@ -1,9 +1,9 @@
 package com.amigoscode.cli_project.car;
 
 public class CarService {
-    private static CarDao carDao;
-    public CarService() {
-        carDao = new CarDao();
+    private final CarDao carDao;
+    public CarService(CarDao dao) {
+        carDao = dao;
     }
 
     public Car getCar(Make make) {

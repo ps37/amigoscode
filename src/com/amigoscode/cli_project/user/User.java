@@ -13,20 +13,15 @@ public class User {
     private String lastName;
     private final UUID[] bookings = new UUID[maxBookings];
     public static int maxBookings = 10;
+
+    public int getCurrBookIndex() {
+        return currBookIndex;
+    }
+
     private int currBookIndex = 0;
 
-    public Booking[] getBookings() {
-        var books = new Booking[currBookIndex];
-        var bs = new BookingService();
-        var currIndex = 0;
-        for(UUID id : bookings) {
-            if(id == null) {
-                continue;
-            }
-            books[currIndex] = bs.get(id);
-            currIndex++;
-        }
-        return books;
+    public UUID[] getBookings() {
+        return this.bookings;
     }
 
     @Override
