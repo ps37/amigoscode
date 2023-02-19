@@ -11,7 +11,7 @@ public class User {
     private final UUID id;
     private String firstName;
     private String lastName;
-    private final UUID[] bookings;
+    private final UUID[] bookings = new UUID[maxBookings];
     public static int maxBookings = 10;
     private int currBookIndex = 0;
 
@@ -46,11 +46,16 @@ public class User {
         System.out.println(this);
     }
 
+    public User(UUID id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public User(String firstName, String lastName) {
         this.id = MyUuid.generate();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.bookings = new UUID[maxBookings];
     }
 
     public UUID getId() {

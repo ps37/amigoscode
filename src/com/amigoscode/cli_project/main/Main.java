@@ -1,6 +1,7 @@
 package com.amigoscode.cli_project.main;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -16,6 +17,8 @@ import com.amigoscode.cli_project.utils.MyUuid;
 public class Main {
     // Scan the input from user
     static Scanner ourScanner = new Scanner(System.in);
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = "\u001B[0m";
     public static void main(String[] args) {
         System.out.println(
                 "1️⃣ - Book Car\n" +
@@ -30,16 +33,16 @@ public class Main {
         while(true) {
             System.out.println("Enter input");
             String input = ourScanner.nextLine();
-            int intInput = Integer.parseInt(input);
-            if(intInput < 1 || intInput > 8) {
-                throw new IllegalArgumentException("Enter a valid input");
+            if(input.equals("7")) break;
+            try {
+                processInput(input);
+            } catch (Exception e) {
+                System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
             }
-            if(intInput == 7) break;
-            processInput(input);
         }
     }
 
-    private static void processInput(String input) {
+    private static void processInput(String input) throws Exception {
         switch (input) {
         case "1":
             bookCar();
@@ -62,6 +65,8 @@ public class Main {
         case "8":
             addUser();
             break;
+        default:
+            System.out.println("Please enter a valid input!");
         }
     }
     private static void addUser() {

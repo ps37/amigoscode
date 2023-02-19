@@ -3,7 +3,7 @@ package com.amigoscode.cli_project.user;
 import java.util.UUID;
 
 public class UserService {
-    private static final UserDao dao = new UserDao();
+    private final UserDao dao = new UserFileDataAccessService();
 
     public void addUser(String firstName, String lastName) {
         dao.saveUser(new User(firstName, lastName));
