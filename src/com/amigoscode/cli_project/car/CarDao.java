@@ -1,17 +1,20 @@
 package com.amigoscode.cli_project.car;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarDao {
-    private static final Car[] cars;
+    private static final List<Car> cars;
 
     static {
-        cars = new Car[4];
-        cars[0] = new Car(Make.TOYOTA);
-        cars[1] = new Car(Make.TESLA);
-        cars[2] = new Car(Make.HONDA);
-        cars[3] = new Car(Make.LUCID);
+        cars = new ArrayList<>();
+        cars.add(new Car(Make.TOYOTA));
+        cars.add(new Car(Make.TESLA));
+        cars.add(new Car(Make.HONDA));
+        cars.add(new Car(Make.LUCID));
     }
 
     public Car[] getAllCars() {
-        return cars;
+        return cars.toArray(new Car[0]);
     }
 }

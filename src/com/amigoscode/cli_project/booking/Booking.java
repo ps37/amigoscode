@@ -3,7 +3,6 @@ package com.amigoscode.cli_project.booking;
 import java.util.UUID;
 
 import com.amigoscode.cli_project.car.Car;
-import com.amigoscode.cli_project.user.UserService;
 import com.amigoscode.cli_project.utils.MyUuid;
 
 public class Booking {

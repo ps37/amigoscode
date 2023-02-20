@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class UserFileDataAccessService implements UserDao {
-    private static int nextAvailableIndex = 0;
     private static final String filePath = "src/com/amigoscode/cli_project/users.csv";
 
     static {
@@ -20,16 +19,11 @@ public class UserFileDataAccessService implements UserDao {
         while(fileScanner.hasNext()) {
             String currUsrStr = fileScanner.nextLine();
             String[] currUsrStrArr = currUsrStr.split(" ");
-            users[nextAvailableIndex] = new User(UUID.fromString(
-                    currUsrStrArr[0]),
+            users.add(new User(
+                    UUID.fromString(currUsrStrArr[0]),
                     currUsrStrArr[1],
-                    currUsrStrArr[2]);
-            nextAvailableIndex++;
+                    currUsrStrArr[2])
+            );
         }
-    }
-
-    public void saveUser(User user) {
-        users[nextAvailableIndex] = user;
-        nextAvailableIndex++;
     }
 }
