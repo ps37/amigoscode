@@ -1,6 +1,7 @@
 package com.amigoscode.cli_project.main;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import com.amigoscode.cli_project.car.CarDao;
 import com.amigoscode.cli_project.car.CarService;
 import com.amigoscode.cli_project.car.Make;
 import com.amigoscode.cli_project.user.User;
+import com.amigoscode.cli_project.user.UserArrayDataAccessService;
 import com.amigoscode.cli_project.user.UserDao;
 import com.amigoscode.cli_project.user.UserFileDataAccessService;
 import com.amigoscode.cli_project.user.UserService;
@@ -20,7 +22,7 @@ import com.amigoscode.cli_project.utils.MyUuid;
 public class Main {
     // Singletons
     public final static BookingDao bookingDao = new BookingDao();
-    public static final UserDao userDao = new UserFileDataAccessService();
+    public static final UserDao userDao = new UserArrayDataAccessService();
     public final static UserService userService = new UserService(userDao);
     public static final BookingService bookingService = new BookingService(bookingDao, userService);
     public final static CarDao carDao = new CarDao();
@@ -77,7 +79,7 @@ public class Main {
             addUser();
             break;
         default:
-            System.out.println("Please enter a valid input!");
+            System.out.println(ANSI_RED + "Please enter a valid input!" + ANSI_RESET);
         }
     }
     private static void addUser() {
@@ -136,10 +138,8 @@ public class Main {
     private static void showAllUsers() {
         var users = userService.getAll();
         for(User user : users) {
-            if(user == null) {
-                continue;
-            }
-            System.out.println(user);
+            Optional<User> optionalUser = Optional.ofNullable(user);
+            optionalUser.ifPresentOrElse(System.out::println, () -> {});
         }
     }
 }

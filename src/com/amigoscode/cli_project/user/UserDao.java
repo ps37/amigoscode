@@ -1,5 +1,6 @@
 package com.amigoscode.cli_project.user;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserDao {
@@ -11,12 +12,9 @@ public interface UserDao {
     }
     default User getUser(UUID id) throws RuntimeException {
         for(User user : users) {
-            if(user == null) {
-                continue;
-            }
-            if(user.getId().compareTo(id) == 0) {
+            Optional<User> optionalUser = Optional.ofNullable(user);
+            if(optionalUser.isPresent() && user.getId().compareTo(id) == 0)
                 return user;
-            }
         }
         throw new RuntimeException("User with the given ID doesn't exist!");
     }
